@@ -1,0 +1,5 @@
+name = PSU Header
+description = Boilerplate header for PSU websites.
+core = 7.x
+package = PSU
+

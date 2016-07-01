@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * Impliments hook_theme().
+ */
+function psu_header_theme($existing, $type, $theme, $path) {
+  return array(
+    'psu_header' => array(
+      'variables' => array('tier2_name' => NULL),
+      'template' => 'psu-header',
+    ),
+    'psu_header_menu' => array(
+      'variables' => array('menu' => NULL),
+      'template' => 'psu-header_menu',
+    ),
+  );
+}
+
+/**
+ * Impliments hook_block_info().
+ */
+function psu_header_block_info() {
+  // This example comes from node.module.
+  $blocks['psu_header'] = array(
+    'info' => t('PSU Header'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Impliments hook_block_view().
+ */
+function psu_header_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'psu_header':
+      $block['content'] = array(
+        '#markup' => theme('psu_header'),
+        '#attached' => array('css' => array(drupal_get_path('module', 'psu_header').'/css/psu-header.css')),
+      );
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Impliments hook_preprocess_psu_header().
+ */
+function psu_header_preprocess_psu_header(&$variables) {
+  $variables['tier2_name'] = 'Center for Excellence in Science Education';
+}
